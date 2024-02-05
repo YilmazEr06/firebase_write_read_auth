@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1082667359582",
+    "project_id": "flutter-auth-write-read",
+    "storage_bucket": "flutter-auth-write-read.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1082667359582:android:3a6202def3be4f1eeb03cf",
+        "android_client_info": {
+          "package_name": "com.example.firebase_write_read_auth"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1-lk88wlxO83ZPMONDhODD2PRgMhswqw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
