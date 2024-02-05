@@ -1,3 +1,4 @@
+
 import 'package:firebase_write_read_auth/Databse/firebase.dart';
 import 'package:firebase_write_read_auth/screens/loginpage/companents/loginformwidget.dart';
 import 'package:flutter/material.dart';
@@ -14,13 +15,20 @@ class _MyHomePageState extends State<loginpage> {
                       .loginWithemailAndPassword(
                           controlleremail, controllerpassword)
                       .then((value) {
-                    if (value == "succes") Navigator.pushNamed(context, "/main");
+                    if (value == "succes") {
+                          Navigator.pushNamed(context, "/main");
+                       
+                    }
+                    
                     else {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(content: Text(value)),
                       );
                     }
-                  });}
+                  });
+                  
+              
+                  }
 
 @override
   void initState() {

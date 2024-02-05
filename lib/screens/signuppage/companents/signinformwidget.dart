@@ -44,7 +44,7 @@ class MyCustomsignupForm extends StatelessWidget {
                 controller: controlleusername,
                 labelText: "Enter your user name",
                 validator: (value) {
-                  return (value!.isEmpty)?(value.length>3)?null:"Doldu ulen":"Çok kısa";
+                  return (value!.isEmpty)?"Doldur ulen":((value.length>3)?null:"Çok kısa");
                 },
               ),
             ),
@@ -54,7 +54,7 @@ class MyCustomsignupForm extends StatelessWidget {
                 controller: controllerlastname,
                 labelText: "Enter your last name",
                 validator: (value) {
-                  return (value!.isEmpty)?(value.length>2)?null:"Doldu ulen":"Çok kısa";
+                  (value!.isEmpty)?"Doldur ulen":((value.length>2)?null:"Çok kısa");
                 },
               ),
             ),
