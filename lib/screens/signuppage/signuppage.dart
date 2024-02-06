@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_write_read_auth/Databse/dbfire.dart';
 import 'package:firebase_write_read_auth/Databse/firebase.dart';
 import 'package:firebase_write_read_auth/models/user.dart';
@@ -12,19 +13,41 @@ class signupscreen extends StatefulWidget {
 }
 class _MyHomePageState extends State<signupscreen> {
   
-  static createuseroperation(BuildContext context,
-   String username,
-   String lastname,
-   String email,
-   String password)  
-  { 
-   firebasehlp().createuserWithemailandPassword(email, password).then((value) {
-    if (value == "succes"){ dbfire().addusers(
-      User(name: username, surname: lastname, email: email, password: password))
-      .then((value) {
-         Navigator.pushNamedAndRemoveUntil(context, "/main", (route) => false); });}
+  static createuseroperation(
+    BuildContext context,
+    Usermodel user,
+  
+  )  
+  async { 
+    firebasehlp().createuserWithemailandPassword(user.email!,user.password!).then((value) async {
+
+
+  
+    if (value[0] == "succes") 
+    { dbfire().addusers(
+      Usermodel(
+        name: user.name,
+       surname: user.surname,
+        email: user.email,
+         password: user.password,
+         birthday: user.birthday
+          ),value[1] as UserCredential
+          
+          ).then((value) => Navigator.pushNamedAndRemoveUntil(context, "/main", (route) => false));
+        
+       
+      
+      
+      
+      }
     else print(value);
-   },);
+
+ });
+   
+   
+ 
+
+
 
    
 
@@ -40,8 +63,9 @@ class _MyHomePageState extends State<signupscreen> {
   @override
   Widget build(BuildContext context) { 
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 173, 173, 170),
       appBar: AppBar(
-        backgroundColor:  const Color.fromARGB(255, 173, 173, 170)
+        backgroundColor:  Color.fromARGB(0, 173, 173, 170)
       ),
     
       body:  Container(

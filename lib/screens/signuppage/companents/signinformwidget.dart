@@ -1,19 +1,33 @@
 import 'package:firebase_write_read_auth/Globalwidgets/createtextfiled.dart';
+import 'package:firebase_write_read_auth/models/user.dart';
+import 'package:firebase_write_read_auth/screens/signuppage/companents/datepicker.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
-class MyCustomsignupForm extends StatelessWidget {
-  final void Function(BuildContext context, String username,String lastname,String email,String password) signoperation;
-  MyCustomsignupForm(this.signoperation, {super.key});
+class MyCustomsignupForm extends StatefulWidget {
+  final void Function(BuildContext context,Usermodel user) signoperation;
+  const MyCustomsignupForm(this.signoperation, {super.key});
 
+  @override
+  State<MyCustomsignupForm> createState() => _MyCustomsignupFormState();
+}
+
+class _MyCustomsignupFormState extends State<MyCustomsignupForm> {
   final _formKey = GlobalKey<FormState>();
 
   late TextEditingController controlleremail;
+
   late TextEditingController controllerpassword;
+
   late TextEditingController controllerpasswordagain;
+
   late TextEditingController controlleusername;
+
   late TextEditingController controllerlastname;
+  
+  late TextEditingController controllerdatetime;
+
   @override
   Widget build(BuildContext context) {
     // Build a Form widget using the _formKe
@@ -23,13 +37,15 @@ class MyCustomsignupForm extends StatelessWidget {
     controllerpasswordagain = TextEditingController();
     controlleusername = TextEditingController();
     controllerlastname = TextEditingController();
+    controllerdatetime = TextEditingController();
+     
 
     return Form(
       key: _formKey,
       child: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
+          children: <Widget>[     
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
               child: Text("Signup ",
@@ -72,6 +88,11 @@ class MyCustomsignupForm extends StatelessWidget {
                 },
               ),
             ),
+              Padding(
+              padding: const  EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+              child: datepicker(controller: controllerdatetime ,)
+            ),
+
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
               child: CreateTextFieldwidget(
@@ -135,8 +156,13 @@ class MyCustomsignupForm extends StatelessWidget {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text('Giriş yapılıyor')),
                     );
-                    signoperation(
-                        context,controlleusername.text,controllerlastname.text,controlleremail.text,controllerpassword.text);
+                        widget.signoperation(context, Usermodel(name: controlleusername.text,
+                           surname: controllerlastname.text, 
+                           email: controlleremail.text, 
+                           password: controllerpassword.text,
+                           birthday: controllerdatetime.text
+                           )
+                           );
                   }
                 },
               ),
@@ -144,6 +170,9 @@ class MyCustomsignupForm extends StatelessWidget {
           ],
         ),
       ),
+      
     );
+    
   }
 }
+
